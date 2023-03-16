@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../actions/userActions';
+import Drawercomp from './Drawercomp';
 
 
 const menu = [{name:"Home",route:"/"},{name:"My profile",route:"/profile"},{name:"Academics",route:"/academics"},{name:"Admissions",route:"/admissions"},{name:"Clubs",route:"/clubs"},{name:"Faculty",route:"faculty"},{name:"Contact",route:"contact"},]
@@ -46,8 +47,8 @@ function Appbar() {
     <AppBar position="static" sx={{fontFamily:"cinzel",backgroundColor:'#2196f3'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
-        
-          <Typography
+        <Drawercomp/>
+          <Box
          
             noWrap
             component="img"
@@ -97,16 +98,16 @@ function Appbar() {
               ))}
             </Menu>
             
-            <Link to="/"><Typography
+            <Link to="/"><Box
            
             noWrap
             component="img"
             src={logo}
             
             sx={{
-              mr: 2,
+              mr: 3,
               display: { xs: 'flex', md: 'none' },
-              flexGrow: 0.5,width:"80%",my:1
+              flexGrow: 0.5,width:"100%",my:1
             
             }}
           /></Link>

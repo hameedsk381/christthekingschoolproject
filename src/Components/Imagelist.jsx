@@ -1,7 +1,8 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Button, Link, Modal, Typography } from '@mui/material';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 const arrayRange = (start, stop, step) =>
   Array.from(
     { length: (stop - start) / step + 1 },
@@ -37,7 +38,13 @@ export default function Imagelist() {
    aria-describedby="modal-modal-description"
  >
    <Box sx={style}>
-   <img src={img} alt="img"/>
+   <TransformWrapper>
+   <TransformComponent>
+   <img src={img} alt="img" />
+   <Button variant='contained' size='small' sx={{m:"auto",my:1}} href={img} download> Download image</Button>
+   </TransformComponent>
+ </TransformWrapper>
+   
      
    </Box>
  </Modal>
@@ -48,12 +55,13 @@ export default function Imagelist() {
    
  >
    {arrayRange(1455, 1544, 1).map((item,i) => (
-     <ImageListItem key={i} >
+     <ImageListItem key={i}  >
        <img
         src= {require(`../assets/IMG_${item}.JPG`)}
          alt={item.title}
          loading="lazy"
          onClick={()=>{setOpen(true);setImg(require(`../assets/IMG_${item}.JPG`))}}
+         style={{filter:"drop-shadow(8px 8px 10px gray)"}}
        />
      </ImageListItem>
    ))}

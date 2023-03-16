@@ -1,7 +1,7 @@
-import { Box, Grid, Modal, Stack, Typography, } from "@mui/material";
+import { Box, Grid, Modal, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Announcements from "./Announcements";
-import banner from '../assets/banner.JPG'
+import banner from "../assets/banner.JPG";
 import Marquee from "react-fast-marquee";
 
 import Message from "./Message";
@@ -17,22 +17,22 @@ const arrayRange = (start, stop, step) =>
     { length: (stop - start) / step + 1 },
     (value, index) => start + index * step
   );
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width:{xs:"100%",lg:"50%"},
-    bgcolor: 'background.paper',
-   
-    boxShadow: 20,
-    p: 2,
-  };
- 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { xs: "100%", lg: "50%" },
+  bgcolor: "background.paper",
+
+  boxShadow: 20,
+  p: 2,
+};
+
 const Home = () => {
-  const [img,setImg] = useState()
+  const [img, setImg] = useState();
   const [open, setOpen] = useState(false);
-  
+
   const handleClose = () => setOpen(false);
   const responsive = {
     superLargeDesktop: {
@@ -58,17 +58,16 @@ const Home = () => {
       container
       sx={{ display: { xs: "block", md: "flex" }, backgroundColor: "#2196f3" }}
     >
-    <Modal
-   open={open}
-   onClose={handleClose}
-   aria-labelledby="modal-modal-title"
-   aria-describedby="modal-modal-description"
- >
-   <Box sx={style}>
-   <img src={img} alt="img"/>
-     
-   </Box>
- </Modal>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <img src={img} alt="img" />
+        </Box>
+      </Modal>
       <Grid
         item
         xs={12}
@@ -102,12 +101,14 @@ const Home = () => {
                 className="max-h-[600px] object-cover md:h-[590px] h-[200px] w-[100%]  img-fluid "
                 loading="lazy"
                 alt="logo"
-                onClick={()=>{setOpen(true);setImg(require(`../assets/IMG_${item}.JPG`))}}
+                onClick={() => {
+                  setOpen(true);
+                  setImg(require(`../assets/IMG_${item}.JPG`));
+                }}
               />
             </div>
           ))}
         </Carousel>
-        
       </Grid>
       <Grid item xs={12} md={3} sx={{ maxHeight: "100%" }}>
         <Announcements
@@ -119,24 +120,63 @@ const Home = () => {
           content="R16 Exam results are out check out here"
         />
       </Grid>
-      
-      
- 
-  <Values/>
-     <Parallax
-     blur={3}
-      bgImage={banner}
-      bgImageAlt="banner"
-      strength={300}
-  >
 
-      <Box sx={{ height: {xs:200,md:350,lg:500},width:"100vw" }} >
-      <Stack  sx={{width:"100%",height:"100%",justifyContent:"center"}}>
-<Typography  color={'InfoBackground'} sx={{margin:"auto",my:0,stroke:"black",fontSize:{xs:15,md:60}}} fontWeight={'bold'}> Creating a <Typography  fontWeight={'bold'}  sx={{color:"#0096ff", display:"inline-flex",fontSize:{xs:20,md:60}}}> SOLIDITY OF PURPOSE</Typography></Typography>
-<Typography  color={'InfoBackground'} sx={{margin:"auto",my:0,stroke:"black",fontSize:{xs:15,md:60}}} fontWeight={'bold'}> and <Typography  fontWeight={'bold'}  sx={{color:"#0096ff", display:"inline-flex",fontSize:{xs:20,md:60}}}>STRENGTH OF CHARACTER</Typography></Typography>
-</Stack>
-      </Box>
-  </Parallax>
+      <Values />
+      <Parallax blur={3} bgImage={banner} bgImageAlt="banner" strength={300}>
+        <Box sx={{ height: { xs: 200, md: 350, lg: 500 }, width: "100vw" }}>
+          <Stack
+            sx={{ width: "100%", height: "100%", justifyContent: "center" }}
+          >
+            <Typography
+              color={"InfoBackground"}
+              sx={{
+                margin: "auto",
+                my: 0,
+                stroke: "black",
+                fontSize: { xs: 15, md: 60 },
+              }}
+              fontWeight={"bold"}
+            >
+              {" "}
+              Creating a{" "}
+              <Typography
+                fontWeight={"bold"}
+                sx={{
+                  color: "#0096ff",
+                  display: "inline-flex",
+                  fontSize: { xs: 20, md: 60 },
+                }}
+              >
+                {" "}
+                SOLIDITY OF PURPOSE
+              </Typography>
+            </Typography>
+            <Typography
+              color={"InfoBackground"}
+              sx={{
+                margin: "auto",
+                my: 0,
+                stroke: "black",
+                fontSize: { xs: 15, md: 60 },
+              }}
+              fontWeight={"bold"}
+            >
+              {" "}
+              and{" "}
+              <Typography
+                fontWeight={"bold"}
+                sx={{
+                  color: "#0096ff",
+                  display: "inline-flex",
+                  fontSize: { xs: 20, md: 60 },
+                }}
+              >
+                STRENGTH OF CHARACTER
+              </Typography>
+            </Typography>
+          </Stack>
+        </Box>
+      </Parallax>
       <Grid
         item
         xs={12}
@@ -232,7 +272,7 @@ const Home = () => {
         md={4}
         sx={{ backgroundColor: "#2196f3", borderBlock: "2px solid white" }}
       >
-        <Menulist menu="Gallery"  bg={1516} />
+        <Menulist menu="Gallery" bg={1516} />
       </Grid>
     </Grid>
   );

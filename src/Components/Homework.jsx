@@ -5,11 +5,11 @@ const Homework = () => {
   return (
   <Grid container  spacing={2}>
  {[1,2,3,4,5,6,7,8,9,10].map(item=>(
-  <Grid item xs={12} md={4} key={item}  >
-  <Paper variant='outlined' sx={{border:"1px solid #2196f3",m:3,py:2,height:400}}>
+  <Grid item xs={12} md={6} key={item}  >
+  <Paper variant='outlined' sx={{border:"1px solid #2196f3",m:3,pt:2,bgcolor:"Highlight",color:"HighlightText"}}>
    
-  <Typography variant='h6' sx={{mx:3,color:"#2196f3"}}>CLASS - {item} <Divider orientation='vertical' sx={{ border: "1px solid #2196f3",mx:1 ,display:"inline"}} />  SECTION - A</Typography>
-  <Divider sx={{ border: "1px solid #2196f3",my:1 }} />
+  <Typography  sx={{mx:3,color:"white",fontSize:{xs:15,lg:19}}}>CLASS - {item} <Divider orientation='vertical' sx={{ border: "1px solid #2196f3",mx:1 ,display:"inline"}} />  SECTION - A</Typography>
+  <Divider sx={{ border: "1px solid white",mt:1 }} />
 <BasicTable/>
   </Paper>
   </Grid>
@@ -31,12 +31,12 @@ const rows = [
 
 export  function BasicTable() {
   return (
-    <TableContainer  component={Box} sx={{p:2,my:1}}>
-      <Table  aria-label="simple table">
+    <TableContainer   component={Box} sx={{p:{xs:0,lg:2},bgcolor:"white",}}>
+      <Table  >
         <TableHead>
           <TableRow>
-            <TableCell sx={{fontSize:{xs:13,lg:20}}} variant='head'>Subject</TableCell>
-            <TableCell sx={{fontSize:{xs:13,lg:20}}} align="left" variant='head'>Home work</TableCell>
+            <TableCell sx={{fontSize:{xs:13,lg:20,color:"#2196f3"}}} variant='head'>Subject</TableCell>
+            <TableCell sx={{fontSize:{xs:13,lg:20,color:"#2196f3"}}} align="left" variant='head'>Home work</TableCell>
             
           </TableRow>
         </TableHead>

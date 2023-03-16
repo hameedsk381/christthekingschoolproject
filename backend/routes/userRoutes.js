@@ -7,24 +7,21 @@ import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
 const Storages = multer.diskStorage({
-  destination: function(req, file, cb) {
-      cb(null, 'images');
-  },
+  destination: 'images',
   filename: function(req, file, cb) {   
-      cb(null,randomUUID() + file.originalname + path.extname(file.originalname));
-  }
-});
+    cb(null,randomUUID() + file.fieldname + '_' + Date.now() +path.extname(file.originalname)); 
+}});
 
 const fileFilter = (req, file, cb) => {
   const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
   if(allowedFileTypes.includes(file.mimetype)) {
       cb(null, true);
   } else {
-      cb(null, false);
+      cb(new Error('Please upload image file'));
   }
 }
 
-const upload = multer({ storage:Storages,fileFilter:fileFilter });
+const upload = multer({ storage:Storages,fileFilter:fileFilter,limits:{fileSize:1000000} });
 const userRoute = express.Router();
 
 userRoute.post("/register",upload.single('image'),async (req, res) => {
