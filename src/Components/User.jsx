@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Divider, IconButton, Link, Paper, Stack } from "@mui/material";
+import { Box, Breadcrumbs, Divider, IconButton, Paper, Stack } from "@mui/material";
 import React, {  useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -24,12 +24,13 @@ import Commonmenu from "./Commonmenu";
 import { CameraAlt } from "@mui/icons-material";
 import Cropper from "react-easy-crop";
 import { grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const User = () => {
   const dispatch = useDispatch();
   const loginstate = useSelector((state) => state.loginUserReducer);
   const { loading, error,currentUser } = loginstate;
-  console.log(loginstate);
+ 
 
   
   return (
@@ -38,17 +39,17 @@ const User = () => {
 <Box component="div" role="presentation" sx={{my:2}}>
 <Typography variant="h6">Profile</Typography>
 <Breadcrumbs aria-label="breadcrumb" >
-  <Link underline="hover" color="inherit" href="/">
+  <Link underline="hover" color="inherit" to="/">
   Home
   </Link>
   <Link
     underline="hover"
     color="inherit"
-    href="/material-ui/getting-started/installation/"
+    to="/faculty"
   >
    Faculty
   </Link>
-  <Typography sx={{ color: "#757ce8" }}>Profile</Typography>
+  <Typography sx={{ color: "#757ce8",textTransform:"capitalize" }}>{currentUser.name}</Typography>
 </Breadcrumbs>
 </Box>
       
@@ -66,7 +67,7 @@ const User = () => {
         }}
       />
       <Avatar
-        src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhbmRvbSUyMHBlb3BsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1727&q=60"
+        src={currentUser.profilePic}
         sx={{
           my: {xs:-6,lg:-10},
      margin:"auto",
@@ -84,7 +85,7 @@ const User = () => {
           alignItems: "center",
         }}
       >
-        <Typography sx={{fontWeight:"bold",fontSize:{xs:17,lg:25,}}}>{currentUser.name}</Typography>
+        <Typography sx={{fontWeight:"bold",fontSize:{xs:17,lg:25,textTransform:"capitalize"}}}>{currentUser.name}</Typography>
         <Typography sx={{fontWeight:"bold",fontSize:{xs:14,lg:18}}} color={grey[600]}>
           {currentUser.department}  Department
         </Typography>

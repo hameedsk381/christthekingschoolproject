@@ -58,3 +58,17 @@ export const updateProfilePicture = (state={}, action) =>{
       return state;
   }
 }
+export const getUserReducer = (state={},action)=>{
+  switch (action.type) {
+      case "GET_USER_REQUEST":
+          return { loading: true };
+      case "GET_USER_SUCCESS":
+          return { loading: false, success: true,currentProfile:action.payload };
+      case "GET_USER_ERROR":
+          return { loading: false, error: action.payload };
+          
+      default:
+          return state;
+  }
+
+}

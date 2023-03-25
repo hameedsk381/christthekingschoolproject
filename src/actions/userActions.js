@@ -59,3 +59,14 @@ export const updateProfilePic = (formData) => async(dispatch)=>{
       dispatch({ type: "USER_UPDATE_PROFILE_PIC_ERROR", payload: err.message });
     }
 }
+export const getUser =(userid)=>async(dispatch)=>{
+  dispatch({ type: "GET_USER_REQUEST" });
+  try {
+    const res = await axios.get(`http://localhost:5000/api/users/${userid}`);
+    dispatch({ type: "GET_USER_SUCCESS", payload: res.data });
+    console.log(res.data);
+   
+  } catch(err){
+      dispatch({ type: "GET_USER_ERROR", payload: err.response.data.message });
+  }
+}

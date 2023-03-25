@@ -1,10 +1,10 @@
 import { Textarea } from '@mui/joy';
-import { Box, Breadcrumbs, Button, Container, FormControl, Grid, Input, InputLabel, Link, MenuItem, OutlinedInput, Paper, Select, Stack, TextareaAutosize, TextField, Typography } from '@mui/material'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { Box, Breadcrumbs, Button, Container, FormControl, Grid, InputLabel, Link, MenuItem,  Paper, Select, Stack,  TextField, Typography } from '@mui/material'
+
+import  {  useState } from 'react'
 
 const Contact = () => {
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -25,6 +25,25 @@ const Contact = () => {
    <Typography variant='h6'  color="Highlight" sx={{px:3,pt:2,textAlign:{xs:"center",lg:"left"}}}>Contact <Typography variant='h6' display={"inline-flex"}>Us</Typography></Typography>
   <Grid container spacing={2} sx={{p:2}}>
   <Grid item xs={12} md={6}>
+ 
+  
+  <Paper variant='outlined' sx={{p:2,bgcolor:"#2196f3",color:"white"}} >
+  <Typography variant='h4' fontFamily='-moz-initial'> Christ The King International School </Typography>
+ <Stack spacing={1} sx={{py:2,textTransform:'capitalize'}}>
+
+ <Typography sx={{fontSize:"small"}} >sunnapubatila center, Mogalrajapuram</Typography>
+ <Typography sx={{fontSize:"small"}}> Christurajupuram, Vijayawada </Typography>
+ <Typography sx={{fontSize:"small"}} fontWeight={'bold'}>Andhra Pradesh </Typography>
+ <Typography sx={{fontSize:"small"}}>
+ 520008
+ </Typography>
+ <Typography sx={{fontSize:"small"}}>Phone :<Link underline='none' style={{color:"white"}}> +91 74269857439</Link></Typography>
+ <Typography sx={{fontSize:"small"}}>Email : <Link underline='none' style={{color:"white"}}> Christtheking@gmail.com</Link> </Typography>
+ </Stack>
+ 
+  </Paper>
+  </Grid>
+  <Grid item xs={12} md={6} >
   <Stack sx={{px:3,py:{xs:0,md:3}}} spacing={3} >
   <Stack direction='row' justifyContent="space-between" spacing={3} sx={{display:{xs:"none",md:"flex"}}}>
   <TextField label="Full Name" fullWidth size='small'/>
@@ -80,23 +99,6 @@ const Contact = () => {
 />
 <Button variant='contained' size='small' type='submit'>Submit</Button>
   </Stack>
-  </Grid>
-  <Grid item xs={12} md={6} >
-  <Paper variant='outlined' sx={{p:2,bgcolor:"#2196f3",color:"white"}} >
-  <Typography sx={{fontSize:"large"}} fontFamily='-moz-initial'> Christ The King International School </Typography>
- <Stack spacing={1} sx={{py:2}}>
-
- <Typography sx={{fontSize:"small"}} >sunnapubatila center, Mogalrajapuram</Typography>
- <Typography sx={{fontSize:"small"}}> Christurajupuram, Vijayawada </Typography>
- <Typography sx={{fontSize:"small"}} fontWeight={'bold'}>Andhra Pradesh </Typography>
- <Typography sx={{fontSize:"small"}}>
- 520008
- </Typography>
- <Typography sx={{fontSize:"small"}}>Phone :<Link underline='none' style={{color:"white"}}> +91 74269857439</Link></Typography>
- <Typography sx={{fontSize:"small"}}>Email : <Link underline='none' style={{color:"white"}}> Christtheking@gmail.com</Link> </Typography>
- </Stack>
- 
-  </Paper>
   </Grid>
   </Grid>
    </Paper>

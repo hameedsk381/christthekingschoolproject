@@ -6,7 +6,7 @@ import { Button } from '@mui/joy';
 import { Link } from 'react-router-dom';
 
 
-export default function Menulist({menu,bg}) {
+export default function Menulist({menu,bg,route}) {
   return (
     <Card sx={{ minHeight: '280px' ,margin:"auto",mx:3,my:4,transition:"transform .2s",'&:hover': {transform: "scale(1.1)", boxShadow: 'lg', borderBlock:"3px solid white",mx:3 }}}>
       <CardCover>
@@ -27,7 +27,7 @@ export default function Menulist({menu,bg}) {
       />
       <CardContent sx={{ justifyContent: 'center',textAlign:"center" }}>
         <Button  variant='text'  sx={{color:"white",mb:4,textAlign:"left",borderRadius:'0px',py:2,fontSize:"20px" ,'&:hover': { boxShadow: 'md', borderBlock:"1px solid white",mx:3,transition: "transform .2s", }}}>
-         <Link to="/gallery">{menu}</Link>
+         <Link to={`/${route}`}>{menu}</Link>
         </Button>
       
        

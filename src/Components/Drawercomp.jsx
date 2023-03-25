@@ -12,13 +12,17 @@ import ListItemText from '@mui/material/ListItemText';
 import { AdminPanelSettings,  ContactEmergencyOutlined, HomeOutlined, MenuOutlined, Person2Outlined, Person3Outlined, School, ShieldMoonOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo1.png'
+import { useSelector } from 'react-redux';
+const drawerlist1 = [{name:"Home",route:"/",icon:<HomeOutlined/>},{name:"Academics",route:"/academics",icon:<School/>},{name:"Admissions",route:"/admissions",icon:<AdminPanelSettings/>},{name:"Clubs",route:"/clubs",icon:<ShieldMoonOutlined/>},{name:"Faculty",route:"faculty",icon:<Person3Outlined/>},{name:"Contact",route:"contact",icon:<ContactEmergencyOutlined/>}]
+const drawerlist = [{name:"Home",route:"/",icon:<HomeOutlined/>},{name:"My profile",route:"/profile",icon:<Person2Outlined/>},{name:"Academics",route:"/academics",icon:<School/>},{name:"Admissions",route:"/admissions",icon:<AdminPanelSettings/>},{name:"Clubs",route:"/clubs",icon:<ShieldMoonOutlined/>},{name:"Faculty",route:"faculty",icon:<Person3Outlined/>},{name:"Contact",route:"contact",icon:<ContactEmergencyOutlined/>}]
 export default function Drawercomp() {
   const [state, setState] = React.useState({
     
     left: false,
    
   });
-
+  const userstate = useSelector(state => state.loginUserReducer)
+  const { currentUser } = userstate
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -47,7 +51,7 @@ export default function Drawercomp() {
     }}
   />
       <List>
-        {[{name:"Home",route:"/",icon:<HomeOutlined/>},{name:"My profile",route:"/profile",icon:<Person2Outlined/>},{name:"Academics",route:"/academics",icon:<School/>},{name:"Admissions",route:"/admissions",icon:<AdminPanelSettings/>},{name:"Clubs",route:"/clubs",icon:<ShieldMoonOutlined/>},{name:"Faculty",route:"faculty",icon:<Person3Outlined/>},{name:"Contact",route:"contact",icon:<ContactEmergencyOutlined/>}].map((text, index) => (
+        { currentUser !== null ? (drawerlist.map((text, index) => (
           <ListItem key={text} disablePadding sx={{ '&& .Mui-selected, && .Mui-selected:hover': {
             bgcolor: 'red',
             '&, & .MuiListItemIcon-root': {
@@ -68,7 +72,28 @@ export default function Drawercomp() {
               <ListItemText   > <Link to={`${text.route}`}>{text.name}</Link></ListItemText>
             </ListItemButton>
           </ListItem>
-        ))}
+        ))): (drawerlist1.map((text, index) => (
+          <ListItem key={text} disablePadding sx={{ '&& .Mui-selected, && .Mui-selected:hover': {
+            bgcolor: 'red',
+            '&, & .MuiListItemIcon-root': {
+              color: 'pink',
+            },
+          },
+          // hover states
+          '& .MuiListItemButton-root:hover': {
+            bgcolor: 'white',
+            '&, & .MuiListItemIcon-root': {
+              color: 'Highlight',
+            },
+          },}}>
+            <ListItemButton >
+              <ListItemIcon sx={{color:"white"}}>
+               {text.icon}
+              </ListItemIcon>
+              <ListItemText   > <Link to={`${text.route}`}>{text.name}</Link></ListItemText>
+            </ListItemButton>
+          </ListItem>
+        )))}
       </List>
       
     </Box>

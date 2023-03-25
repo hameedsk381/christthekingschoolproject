@@ -10,13 +10,11 @@ import Menulist from "./Menulist";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Values from "./Values";
-import { Background, Parallax } from "react-parallax";
+import {  Parallax } from "react-parallax";
+import { useEffect } from "react";
+import axios from "axios";
+import principal from '../assets/principal.JPG'
 
-const arrayRange = (start, stop, step) =>
-  Array.from(
-    { length: (stop - start) / step + 1 },
-    (value, index) => start + index * step
-  );
 const style = {
   position: "absolute",
   top: "50%",
@@ -32,6 +30,7 @@ const style = {
 const Home = () => {
   const [img, setImg] = useState();
   const [open, setOpen] = useState(false);
+  const [pics, setpics] = useState([])
 
   const handleClose = () => setOpen(false);
   const responsive = {
@@ -53,6 +52,12 @@ const Home = () => {
       items: 1,
     },
   };
+useEffect(() => {
+  axios.get("http://localhost:5000/api").then(res=>{
+    
+    setpics(res.data)})
+}, [])
+
   return (
     <Grid
       container
@@ -94,16 +99,16 @@ const Home = () => {
           removeArrowOnDeviceType={["tablet", "mobile"]}
           itemClass="carousel-item-padding-80-px"
         >
-          {arrayRange(1455, 1544, 1).map((item, i) => (
+          {pics && pics.map((item, i) => (
             <div key={i}>
               <img
-                src={require(`../assets/IMG_${item}.JPG`)}
+                src={item}
                 className="max-h-[600px] object-cover md:h-[590px] h-[200px] w-[100%]  img-fluid "
                 loading="lazy"
                 alt="logo"
                 onClick={() => {
                   setOpen(true);
-                  setImg(require(`../assets/IMG_${item}.JPG`));
+                  setImg(item);
                 }}
               />
             </div>
@@ -131,9 +136,9 @@ const Home = () => {
               color={"InfoBackground"}
               sx={{
                 margin: "auto",
-                my: 0,
+                my: 0,textTransform:"uppercase",
                 stroke: "black",
-                fontSize: { xs: 15, md: 60 },
+                fontSize: { xs: 20, md: 60 },
               }}
               fontWeight={"bold"}
             >
@@ -155,9 +160,9 @@ const Home = () => {
               color={"InfoBackground"}
               sx={{
                 margin: "auto",
-                my: 0,
+                my: 0,textTransform:"uppercase",
                 stroke: "black",
-                fontSize: { xs: 15, md: 60 },
+                fontSize: { xs: 20, md: 60 },
               }}
               fontWeight={"bold"}
             >
@@ -189,6 +194,9 @@ const Home = () => {
           borderBlock: "1px solid white",
         }}
       >
+
+
+
         <Message
           role="Correspondent"
           name="Fr. M Louis Raj"
@@ -256,7 +264,7 @@ const Home = () => {
         md={4}
         sx={{ backgroundColor: "#2196f3", borderBlock: "2px solid white" }}
       >
-        <Menulist menu="About" bg={1512} />
+        <Menulist menu="About" bg={1512} route="about" />
       </Grid>
       <Grid
         item
@@ -264,7 +272,7 @@ const Home = () => {
         md={4}
         sx={{ backgroundColor: "#2196f3", borderBlock: "2px solid white" }}
       >
-        <Menulist menu="Facualty" bg={1515} />
+        <Menulist menu="Faculty" bg={1515} route='faculty'/>
       </Grid>
       <Grid
         item
@@ -272,7 +280,7 @@ const Home = () => {
         md={4}
         sx={{ backgroundColor: "#2196f3", borderBlock: "2px solid white" }}
       >
-        <Menulist menu="Gallery" bg={1516} />
+        <Menulist menu="Gallery" bg={1516} route="gallery" />
       </Grid>
     </Grid>
   );

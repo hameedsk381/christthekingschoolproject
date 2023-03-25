@@ -5,7 +5,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { getAllUsersReducer } from "./reducers/userReducer";
 import { registerUserReducer } from "./reducers/userReducer";
 import { loginUserReducer } from "./reducers/userReducer";
-const finalReducer = combineReducers({getAllUsersReducer:getAllUsersReducer,loginUserReducer:loginUserReducer,registerUserReducer:registerUserReducer})
+import { getUserReducer } from "./reducers/userReducer";
+const finalReducer = combineReducers({getAllUsersReducer:getAllUsersReducer,loginUserReducer:loginUserReducer,registerUserReducer:registerUserReducer,getUserReducer:getUserReducer})
 const currentUser = localStorage.getItem("currentUser")? JSON.parse(localStorage.getItem("currentUser")):null;
 const initialState = {loginUserReducer:{currentUser:currentUser}}
 const composeEnchancers = composeWithDevTools({});

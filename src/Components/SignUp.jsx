@@ -18,7 +18,7 @@ import Select from "@mui/material/Select";
 import axios from "axios";
 import logo from "../assets/logo2.png";
 import { registerUser } from "../actions/userActions";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, CircularProgress, Input } from "@mui/material";
 
 const theme = createTheme();
 
@@ -39,9 +39,10 @@ export default function SignUp() {
     formData.append("regId",regId)
     formData.append("email",email)
     formData.append("department",department)
-    formData.append("image",image)
-    formData.append("password",password)
     
+    formData.append("password",password)
+    formData.append("profileimg",image)
+  
    
     dispatch(registerUser(formData));
   };
@@ -55,9 +56,9 @@ export default function SignUp() {
   // }
 
   return (
-    <ThemeProvider theme={theme}>
+
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      
         <Box
           sx={{
             marginBottom: 8,
@@ -66,7 +67,7 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-        {loading && ( <Box sx={{ display: 'flex' }}>
+        {loading && !success && !error && ( <Box sx={{ display: 'flex' }}>
         <CircularProgress />
       </Box>)}
       {success && (<Alert severity="success">User created successfully</Alert>)}
@@ -184,14 +185,14 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-              <TextField
-                  required
+              <Input
+                  
                   fullWidth
-                  name="image"
+                  name="profileimg"
                  
                   type="file"
                   id="image"
-                  accept='.png,.jpg,.jpeg'
+                  accept='image/*'
                   
                
                   onChange={(e) => {
@@ -223,6 +224,6 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+ 
   );
 }

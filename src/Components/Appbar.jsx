@@ -19,9 +19,9 @@ import { logoutUser } from '../actions/userActions';
 import Drawercomp from './Drawercomp';
 
 
-const menu = [{name:"Home",route:"/"},{name:"My profile",route:"/profile"},{name:"Academics",route:"/academics"},{name:"Admissions",route:"/admissions"},{name:"Clubs",route:"/clubs"},{name:"Faculty",route:"faculty"},{name:"Contact",route:"contact"},]
+const menu = [{name:"Home",route:"/"},{name:"My profile",route:"/profile"},{name:"Admissions",route:"/admissions"},{name:"About",route:"/about"},{name:"Clubs",route:"/clubs"},{name:"Faculty",route:"faculty"},{name:"Contact",route:"contact"},]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
+const menu2 = [{name:"Home",route:"/"},{name:"Admissions",route:"/admissions"},{name:"About",route:"/about"},{name:"Clubs",route:"/clubs"},{name:"Faculty",route:"faculty"},{name:"Contact",route:"contact"},]
 
 function Appbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -91,11 +91,15 @@ function Appbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {menu.map((item,i) => (
+              { currentUser !==null  ? (menu.map((item,i) => (
                 <MenuItem key={i} onClick={handleCloseNavMenu}>
                   <Link style={{textAlign:"center",color:"Highlight",fontFamily:"-moz-initial"}} to={`${item.route}`}>{item.name}</Link>
                 </MenuItem>
-              ))}
+              ))): (menu2.map((item,i) => (
+                <MenuItem key={i} onClick={handleCloseNavMenu}>
+                  <Link style={{textAlign:"center",color:"Highlight",fontFamily:"-moz-initial"}} to={`${item.route}`}>{item.name}</Link>
+                </MenuItem>
+              )))}
             </Menu>
             
             <Link to="/"><Box
@@ -133,7 +137,7 @@ function Appbar() {
        </Stack>
            
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {menu.map((item,i) => (
+            {currentUser !== null ? menu.map((item,i) => (
               <Link  key={i}   to={`${item.route}`}><Button
               key={i}
               onClick={handleCloseNavMenu}
@@ -148,7 +152,22 @@ function Appbar() {
               {item.name}
             </Button></Link>
               
-            ))}
+            )): (menu2.map((item,i) => (
+              <Link  key={i}   to={`${item.route}`}><Button
+              key={i}
+              onClick={handleCloseNavMenu}
+              sx={{fontWeight:"bold", my: 2, color: 'white',fontFamily:"cinzel",transition:"transform .2s", '&:hover': {transform: "scale(1.1)",
+             
+                borderBottom:"1px solid #fafafa",
+                boxShadow: 'none',
+              },
+               }}
+             
+            >
+              {item.name}
+            </Button></Link>
+              
+            )))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

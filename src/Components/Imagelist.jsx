@@ -1,13 +1,10 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Box, Button, Link, Modal, Typography } from '@mui/material';
+import { Box, Button, Container,  Modal, Typography } from '@mui/material';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
-const arrayRange = (start, stop, step) =>
-  Array.from(
-    { length: (stop - start) / step + 1 },
-    (value, index) => start + index * step
-  );
+import axios from 'axios';
+
 
 
   const style = {
@@ -21,15 +18,29 @@ const arrayRange = (start, stop, step) =>
     boxShadow: 20,
     p: 2,
   };
+  
+function srcset(image, size, rows = 1, cols = 1) {
+  return {
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${size * cols}&h=${
+      size * rows
+    }&fit=crop&auto=format&dpr=2 2x`,
+  };
+}
+
 export default function Imagelist() {
     const [img,setImg] = React.useState(null)
     const [open, setOpen] = React.useState(false);
-    
+    const [pics, setpics] = React.useState([])
     const handleClose = () => setOpen(false);
-
+    React.useEffect(() => {
+      axios.get("http://localhost:5000/api").then(res=>{
+       
+        setpics(res.data)})
+    }, [])
   return (
-   <Box>
-   <Typography  color={'whitesmoke'} bgcolor="#2196f3" textAlign="center" mt={2} p={2} border="1px solid #2196f3" sx={{fontFamily:"-moz-initial",fontSize:{xs:20,md:30,lg:40}}}>Gallery</Typography>
+   <Container>
+   <Typography  color={'Highlight'} textAlign="center" mt={2} p={2}  sx={{fontFamily:"-moz-initial",fontSize:{xs:20,md:30,lg:40}}}>Gallery</Typography>
   
    <Modal
    open={open}
@@ -48,25 +59,26 @@ export default function Imagelist() {
      
    </Box>
  </Modal>
-   <ImageList
-   sx={{ width: "100%", height: "100%" }}
-   variant="standard"
-   cols={3}
-   
- >
-   {arrayRange(1455, 1544, 1).map((item,i) => (
-     <ImageListItem key={i}  >
-       <img
-        src= {require(`../assets/IMG_${item}.JPG`)}
-         alt={item.title}
-         loading="lazy"
-         onClick={()=>{setOpen(true);setImg(require(`../assets/IMG_${item}.JPG`))}}
-         style={{filter:"drop-shadow(8px 8px 10px gray)"}}
-       />
-     </ImageListItem>
-   ))}
- </ImageList>
-   </Box>
+ 
+ <ImageList
+ sx={{ width: 500, height: 450 }}
+ variant="quilted"
+ cols={4}
+ rowHeight={121}
+>
+ {pics.map((item) => (
+   <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+   <img
+   {...srcset(item, 121, item.rows, item.cols)}
+    alt={item.title}
+    loading="lazy"
+    onClick={()=>{setOpen(true);setImg(item)}}
+    style={{filter:"drop-shadow(8px 8px 10px gray)"}}
+  />
+   </ImageListItem>
+ ))}
+</ImageList>
+   </Container>
   );
 }
 

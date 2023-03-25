@@ -1,24 +1,34 @@
+
 import Marquee from "react-fast-marquee";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./Components/About";
+import Academics from "./Components/Academics";
+import Admin from "./Components/Admin";
+import Admissions from "./Components/Admissions";
 import Appbar from "./Components/Appbar";
+import Clubs from "./Components/Clubs";
 import Contact from "./Components/Contact";
+import Department from "./Components/Department";
 import Faculty from "./Components/Faculty";
+import Facultycard from "./Components/Facultycard";
 import Footer from "./Components/Footer";
 import Home from "./Components/Home";
 import Homework from "./Components/Homework";
 import Imagelist from "./Components/Imagelist";
 import Login from "./Components/Login";
+import Message from "./Components/Message";
+import Messagecard from "./Components/Messagecard";
 import Profilecard from "./Components/Profilecard";
-import Schoolinfo from "./Components/Schoolinfo";
+
 import SignUp from "./Components/SignUp";
-import Teacher from "./Components/Teacher";
-import Teachercards from "./Components/Teachercards";
+
 
 import User from "./Components/User";
 
 function App() {
+
+ 
   return (
     <>
       <Appbar />
@@ -42,9 +52,17 @@ function App() {
         <Route path="/faculty" element={<Faculty />} exact />
         <Route path="/login" element={<Login />} exact />
         <Route path="/profile" element={<User />} exact />
-        <Route path="/academics" element={<Faculty />} exact />
+        <Route path="/academics" element={<Academics />} exact />
         <Route path="/gallery" element={<Imagelist />} exact />
         <Route path="/profilecard" element={<Profilecard />} exact />
+        <Route path="/user/:id" element={<Facultycard/>} exact />
+        <Route path="/about" element={<About/>} exact />
+        <Route path="/message/:id" element={<Messagecard/>} exact />
+        <Route path="/clubs" element={<Clubs/>} exact />
+        <Route path="/departments" element={<Department/>} exact />
+        <Route path="/admin" element={<Admin/>} exact />
+        <Route path="/admissions" element={<Admissions/>} exact />
+      
       </Routes>
 
       <Footer />

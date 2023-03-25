@@ -31,7 +31,7 @@ export default function Teacher({ match }) {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:5000/api/users/getusers");
       setTeacher(result.data);
-      console.log(result.data)
+    
     };
     fetchData();
   }, []);

@@ -26,7 +26,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const loginstate = useSelector((state) => state.loginUserReducer);
   const { loading, error } = loginstate;
-  console.log(loginstate);
 
   React.useEffect(() => {
     if (localStorage.getItem("currentUser")) {
